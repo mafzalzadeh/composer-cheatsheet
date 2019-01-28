@@ -1,14 +1,19 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Composer.json Schema CheatSheet - Dependency Manager for PHP</title>
-    <meta name="description" content="Fancy cheatsheet for Composer, the dependency manager of PHP" />
-    <meta name="keywords" content="help, documentation, cheat sheet, composer" />
-    <link rel="stylesheet" type="text/css" href="bootstrap.css?v2">
-    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
-    <script type="text/javascript">
+
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Composer.json Schema CheatSheet - Dependency Manager for PHP</title>
+  <meta name="description" content="Fancy cheatsheet for Composer, the dependency manager of PHP" />
+  <meta name="keywords" content="help, documentation, cheat sheet, composer" />
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript">
     var schema = '';
     var hints = {
       "home": "This is an interactive guide for exploring various important properties of the <a href='http://composer.json.jolicode.com/'>composer.json</a> file from <a href='http://getcomposer.org'>Composer</a>. <br/> <br/> You can access information about properties by <strong>mousing over</strong>.",
@@ -21,18 +26,18 @@
       "time": "Release date of the version.<br />Must be in <code>YYYY-MM-DD</code>, <code>YYYY-MM-DD HH:MM:SS</code> or <code>YYYY-MM-DDTHH:MM:SSZ</code> format.",
       "license": "The license of the package. This can be either a string or an array of strings.<br />The recommended notation for the most common licenses is (alphabetical):<br /><code>Apache-2.0<br />BSD-2-Clause<br />BSD-3-Clause<br />BSD-4-Clause<br />GPL-2.0<br />GPL-2.0+<br />GPL-3.0<br />GPL-3.0+<br />LGPL-2.1<br />LGPL-2.1+<br />LGPL-3.0<br />LGPL-3.0+<br />MIT</code><br />For closed-source software, you may use <code>proprietary</code> as the license identifier.",
       "authors": "The authors of the package. This is an array of objects.",
-        "authors-name": "The author's name. Usually his real name.",
-        "authors-email": "The author's email address.",
-        "authors-homepage": "An URL to the author's website.",
-        "authors-role": "The authors' role in the project (e.g. developer or translator)",
+      "authors-name": "The author's name. Usually his real name.",
+      "authors-email": "The author's email address.",
+      "authors-homepage": "An URL to the author's website.",
+      "authors-role": "The authors' role in the project (e.g. developer or translator)",
       "support": "Various information to get support about the project.",
-        "support-email" : "Email address for support.",
-        "support-issues" : "URL to the Issue Tracker.",
-        "support-forum" : "URL to the Forum.",
-        "support-wiki" : "URL to the Wiki.",
-        "support-irc" : "IRC channel for support, as irc://server/channel.",
-        "support-source" : "URL to browse or download the sources.",
-        "support-docs" : "URL to the documentation.",
+      "support-email": "Email address for support.",
+      "support-issues": "URL to the Issue Tracker.",
+      "support-forum": "URL to the Forum.",
+      "support-wiki": "URL to the Wiki.",
+      "support-irc": "IRC channel for support, as irc://server/channel.",
+      "support-source": "URL to browse or download the sources.",
+      "support-docs": "URL to the documentation.",
       "require": "Lists packages required by this package. The package will not be installed unless those requirements can be met.<br />It take an object which maps package names to <a href=\"https://getcomposer.org/doc/01-basic-usage.md#package-versions\">version constraints</a>. <br/><code>require</code> and <code>require-dev</code> additionally support stability flags (root-only). These allow you to further restrict or expand the stability of a package beyond the scope of the <a href=\"http://getcomposer.org/doc/#minimum-stability\">minimum-stability</a> setting. You can apply them to a constraint, or just apply them to an empty constraint if you want to allow unstable packages of a dependency's dependency for example.<br /><code>require</code> and <code>require-dev</code> additionally support explicit references (i.e. commit) for dev versions to make sure they are blocked to a given state, even when you run update. These only work if you explicitly require a dev version and append the reference with <code>#&lt;ref&gt;</code>.<br /><br />Examples:<br /><br /><pre><code><br /><span class=\"key\">\"vendor/packge\": </span> \"1.3.2\", <br />// exactly 1.3.2<br /><span class=\"key\">\"vendor/packge\": </span> \"&gt=1.3.2\", <br />// anything above or equal to 1.3.2<br /><span class=\"key\">\"vendor/packge\": </span> \"&lt1.3.2\", <br />// anything below 1.3.2<br /><span class=\"key\">\"vendor/packge\": </span> \"1.3.*\", <br />// &gt=1.3.0 &lt1.4.0<br /><span class=\"key\">\"vendor/packge\": </span> \"~1.3.2\", <br />// &gt=1.3.2 &lt1.4.0<br /><span class=\"key\">\"vendor/packge\": </span> \"~1.3\", <br />// &gt=1.3.0 &lt2.0.0<br /><span class=\"key\">\"vendor/packge\": </span> \"^1.3.2\", <br />// &gt=1.3.2 &lt2.0.0<br /><span class=\"key\">\"vendor/packge\": </span> \"^0.3.2\", <br />// &gt=0.3.2 &lt0.4.0 // except if major version is 0 <br /><br />&gt, &lt, &gt=, &lt= specify upper / lower bounds<br />* wildcard<br />~ allows last digit specified to go up<br />^ doesn't allow breaking changes</code></pre>",
       "require-dev": "Lists packages required for developing this package, or running tests, etc. The dev requirements of the root package only will be installed if <code>install</code> or <code>update</code> is ran with <code>--dev</code>.<br />Packages listed here and their dependencies can not overrule the resolution found with the packages listed in require. This is even true if a different version of a package would be installable and solve the conflict. The reason is that <code>install --dev</code> produces the exact same state as just <code>install</code>, apart from the additional dev packages.<br />If you run into such a conflict, you can specify the conflicting package in the require section and require the right version number to resolve the conflict.<br /><br />Examples:<br /><br /><pre><code><br /><span class=\"key\">\"vendor/packge\": </span> \"1.3.2\", <br />// exactly 1.3.2<br /><span class=\"key\">\"vendor/packge\": </span> \"&gt=1.3.2\", <br />// anything above or equal to 1.3.2<br /><span class=\"key\">\"vendor/packge\": </span> \"&lt1.3.2\", <br />// anything below 1.3.2<br /><span class=\"key\">\"vendor/packge\": </span> \"1.3.*\", <br />// &gt=1.3.0 &lt1.4.0<br /><span class=\"key\">\"vendor/packge\": </span> \"~1.3.2\", <br />// &gt=1.3.2 &lt1.4.0<br /><span class=\"key\">\"vendor/packge\": </span> \"~1.3\", <br />// &gt=1.3.0 &lt2.0.0<br /><span class=\"key\">\"vendor/packge\": </span> \"^1.3.2\", <br />// &gt=1.3.2 &lt2.0.0<br /><span class=\"key\">\"vendor/packge\": </span> \"^0.3.2\", <br />// &gt=0.3.2 &lt0.4.0 // except if major version is 0 <br /><br />&gt, &lt, &gt=, &lt= specify upper / lower bounds<br />* wildcard<br />~ allows last digit specified to go up<br />^ doesn't allow breaking changes</code></pre>",
       "conflict": "Lists packages that conflict with this version of this package. They will not be allowed to be installed together with your package.",
@@ -122,140 +127,144 @@
       "phar-validate": "Validates a composer.json.<br/><br/>You should always run the <code>validate</code> command before you commit your <code>composer.json</code> file, and before you tag a release. It will check if your <code>composer.json</code> is valid."
     };
 
-      $(document).ready(function(){
-        $.get('composer-schema.json', function(data){
-            schema = data;
-        }, 'json');
+    $(document).ready(function () {
+      $.get('composer-schema.json', function (data) {
+        schema = data;
+      }, 'json');
 
-        $('.hint').html(hints['home']);
+      $('.hint').html(hints['home']);
 
-        $('.composer .pair').mouseover(function(e){
-          var el = this;
-          var topPx = $("#header").height() + 61;
-          if ($(document).scrollTop() >= topPx) {
-            topPx = $(document).scrollTop();
-          }
+      $('.composer .pair').click(function (e) {
+        $('#exampleModal').modal('toggle');
+        var el = this;
 
-          $('.doc').css('top', topPx + 'px');
 
-          var key, title;
+        var key, title;
 
-          if (undefined != $('.key', el).attr('data-key')) {
-            key = $('.key', el).attr('data-key');
-          }
-          if (undefined != $('.key', el).attr('data-title')) {
-            title = $('.key', el).attr('data-title');
-          }
-
-          if (!key || !title) {
-            var prefix = (undefined != $('.key', el).attr('data-prefix'))? $('.key', el).attr('data-prefix'):'';
-
-            if (!title) {
-              title = $('.key', el).html().replace(/"/g, '');
-            }
-            if (!key) {
-              key = prefix+title;
-            }
-          }
-
-          $('.title').html(title);
-          if (schema && (undefined != schema['properties'][key])) {
-            var typeData = '';
-            if (undefined != schema['properties'][key]['type']) {
-              typeData = schema['properties'][key]['type'];
-              if (typeData.constructor.toString().indexOf("Array") > -1) {
-                typeData = typeData.join(', ');
-              }
-            }
-            $('.type').html(typeData);
-          } else {
-            $('.type').html('');
-          }
-
-          $('.hint').html(hints[key]);
-        });
-      });
-    </script>
-
-    <style type="text/css">
-      #header p {
-        font-weight: normal;
-        font-size: 18px;
-        line-height: 32px;
-      }
-
-      .composer .pair {
-        cursor:pointer;
-      }
-
-      .composer .pair:hover {
-        background-color:white;
-      }
-      .pair {
-        padding:0px;
-        margin:0px;
-      }
-
-      .doc {
-        position:absolute;
-        #top:50px;
-        font-size:18px;
-        width:400px;
-        line-height:32px;
-      }
-
-      .title {
-        font-weight: bold;
-      }
-
-      .type {
-        font-size: 17px;
-        font-style: italic;
-      }
-
-      .key {
-        color: #580000;
-        font-weight:bold;
-      }
-
-      code {
-          border: 1px solid #ccc;
-          -webkit-border-radius: 3px;
-          -moz-border-radius: 3px;
-          border-radius: 3px;
-          padding: 0px 4px;
-          display: inline-block;
-          line-height: 125%;
-          margin: 0 2px;
+        if (undefined != $('.key', el).attr('data-key')) {
+          key = $('.key', el).attr('data-key');
         }
-      pre {
-        font-size: 14px;
-      }
-    </style>
-  </head>
-  <body>
+        if (undefined != $('.key', el).attr('data-title')) {
+          title = $('.key', el).attr('data-title');
+        }
 
-    <div class="container">
-      <div class="content">
-        <div class="row">
-          <div class="span12" id="header">
-            <h2>Composer Cheat Sheet for developers</h2>
-            <p>Composer is the dependency manager for PHP and you are on a one-page-only documentation for this tool.<br />
-                Official documentation is on the <a href="https://getcomposer.org">official website</a>,
-                this page just brings you the essential.</p>
-          </div>
-        </div>
-        <div class="row">
-            <div class="span8">
-                <h3>One line installer</h3>
+        if (!key || !title) {
+          var prefix = (undefined != $('.key', el).attr('data-prefix')) ? $('.key', el).attr(
+            'data-prefix') : '';
 
-                <pre>curl -sS https://getcomposer.org/installer | php</pre>
-            </div>
+          if (!title) {
+            title = $('.key', el).html().replace(/"/g, '');
+          }
+          if (!key) {
+            key = prefix + title;
+          }
+        }
+
+        $('.title').html(title);
+        if (schema && (undefined != schema['properties'][key])) {
+          var typeData = '';
+          if (undefined != schema['properties'][key]['type']) {
+            typeData = schema['properties'][key]['type'];
+            if (typeData.constructor.toString().indexOf("Array") > -1) {
+              typeData = typeData.join(', ');
+            }
+          }
+          $('.type').html(typeData);
+        } else {
+          $('.type').html('');
+        }
+
+        $('.hint').html(hints[key]);
+      });
+    });
+  </script>
+
+  <style type="text/css">
+    #header p {
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 32px;
+    }
+
+    .composer .pair {
+      cursor: pointer;
+    }
+
+    .composer .pair:hover {
+      background-color: white;
+    }
+
+    .pair {
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .doc {
+
+      font-size: 18px;
+      width: 400px;
+      line-height: 32px;
+    }
+
+    .title {
+      font-weight: bold;
+    }
+
+    .type {
+      font-size: 17px;
+      font-style: italic;
+    }
+
+    .key {
+      color: #580000;
+      font-weight: bold;
+    }
+
+    code {
+      border: 1px solid #ccc;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      padding: 0px 4px;
+      display: inline-block;
+      line-height: 125%;
+      margin: 0 2px;
+    }
+
+    pre {
+      font-size: 14px;
+    }
+
+    #exampleModal {
+      z-index: 9999999999;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="content">
+      <div class="row">
+        <div class="span12" id="header">
+          <h2>Composer Cheat Sheet for developers</h2>
+          <p>Composer is the dependency manager for PHP and you are on a one-page-only documentation for this
+            tool.<br />
+            Official documentation is on the <a href="https://getcomposer.org/">official website</a>,
+            this page just brings you the essential.</p>
         </div>
-        <div class="row" id="documentation">
-          <div class="span8">
-            <h2>composer.phar most needed command line</h2>
-            <pre class="composer">
+      </div>
+      <div class="row">
+        <div class="span8">
+          <h3>One line installer</h3>
+
+          <pre>curl -sS https://getcomposer.org/installer | php</pre>
+        </div>
+      </div>
+      <div class="row" id="documentation">
+        <div class="span8">
+          <h2>composer.phar most needed command line</h2>
+          <pre class="composer">
 <span class="pair">$ composer <span class="key" data-prefix="phar-">require</span> <span class="value">vendor-name/package-name</span></span>
 <span class="pair">$ composer <span class="key" data-prefix="phar-">install</span></span>
 <span class="pair">$ composer <span class="key" data-prefix="phar-">update</span></span>
@@ -263,8 +272,8 @@
 <span class="pair">$ composer <span class="key" data-prefix="phar-">dump-autoload</span> --optimize</span>
 </pre>
 
-            <h2>other commands</h2>
-            <pre class="composer">
+          <h2>other commands</h2>
+          <pre class="composer">
 <span class="pair">$ composer <span class="key" data-prefix="phar-">about</span></span>
 <span class="pair">$ composer <span class="key" data-prefix="phar-">archive</span></span>
 <span class="pair">$ composer <span class="key" data-prefix="phar-">browse</span></span>
@@ -292,9 +301,9 @@
 <span class="pair">$ composer <span class="key" data-prefix="phar-">validate</span></span>
 </pre>
 
-            <h2>composer.json file</h2>
+          <h2>composer.json file</h2>
 
-            <pre class="composer">
+          <pre class="composer">
 {
     <span class="pair"><span class="key">"name"</span>: <span class="value">"vendor-name/project-name"</span>,</span>
     <span class="pair"><span class="key">"description"</span>: <span class="value">"This is a very cool package!"</span>,</span>
@@ -477,34 +486,56 @@
     <span class="pair"><span class="key">"extra"</span>: <span class="value">{ "key": "value" }</span></span>,
     <span class="pair"><span class="key">"bin"</span>: <span class="value">["./bin/toto"]</span></span>
 }</pre>
-          </div>
+        </div>
 
+
+      </div>
+    </div>
+
+    <footer>
+      <p>Brought to you by <a href="https://jolicode.com/">JoliCode</a> - Inspired
+        by <a href="http://browsenpm.org/package.json">Nodejitsu</a> - Found a typo? Something is wrong
+        in this documentation? Just <a href="https://github.com/jolicode/composer-cheatsheet/blob/gh-pages/index.html">fork
+          and edit it</a>!</p>
+
+      <p>This package have been changed by <a href="https://github.com/mafzalzadeh/composer-cheatsheet" target="blank">Mahmood
+          Afzalzadeh</a> to be responsive that can be used on Every device</p>
+    </footer>
+  </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
           <div class="span4">
             <div class="doc">
-                <p class="title"></p>
-                <p class="type"></p>
-                <p class="required"></p>
-                <p class="hint"></p>
+              <h5 class="modal-title title" id="exampleModalLabel">
+                <p class=""></p>
+              </h5>
+
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <p class="type"></p>
+              <p class="required"></p>
+              <p class="hint"></p>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
             </div>
           </div>
         </div>
       </div>
-
-      <footer>
-        <p>Brought to you by <a href="https://jolicode.com">JoliCode</a> - Inspired
-            by <a href="http://browsenpm.org/package.json">Nodejitsu</a> - Found a typo? Something is wrong
-            in this documentation? Just <a href="https://github.com/jolicode/composer-cheatsheet/blob/gh-pages/index.html">fork and edit it</a>!</p>
-      </footer>
     </div>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  </div>
 
-      ga('create', 'UA-29696798-5', 'jolicode.com');
-      ga('send', 'pageview');
 
-    </script>
-  </body>
+</body>
+
 </html>
